@@ -1,66 +1,403 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Crypto Dashboard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Modern Laravel dashboard untuk manajemen airdrop dengan fitur daily checklist, role-based access control, dan dark mode support.
 
-## About Laravel
+## 🚀 Quick Start
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Prerequisites
+- PHP 8.1+
+- Composer
+- Node.js & npm
+- Git
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Setup dari Awal
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### 1. Clone Repository
+```bash
+git clone https://github.com/winzzy12/crypto-dashboard.git
+cd crypto-dashboard
+```
 
-## Learning Laravel
+#### 2. Install Dependencies
+```bash
+# Install PHP dependencies
+composer install
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Install Node dependencies
+npm install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### 3. Setup Environment
+```bash
+# Copy .env.example ke .env
+cp .env.example .env
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Generate application key
+php artisan key:generate
+```
 
-## Laravel Sponsors
+#### 4. Database Setup
+```bash
+# Run migrations
+php artisan migrate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Seed database dengan user default (optional)
+php artisan db:seed
+```
 
-### Premium Partners
+#### 5. Build Assets
+```bash
+# Development
+npm run dev
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# Production
+npm run build
+```
 
-## Contributing
+#### 6. Start Server
+```bash
+# Development server
+php artisan serve
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Server akan berjalan di http://localhost:8000
+```
 
-## Code of Conduct
+## 📋 Default Credentials
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Setelah menjalankan `php artisan db:seed`:
 
-## Security Vulnerabilities
+**Admin User:**
+- Email: `wanz@example.com`
+- Password: `wanz2026`
+- Role: `admin` (full access)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**View User:**
+- Email: `john@example.com`
+- Password: `password`
+- Role: `view` (read-only + password change)
 
-## License
+## 🎯 Fitur Utama
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. **Airdrop Management**
+- ✅ Create, Read, Update, Delete airdrop projects
+- ✅ Upload logo (PNG/JPG)
+- ✅ Track status: Daily, Active, Eligible, Not Eligible, Hold, Waitlist, Completed
+- ✅ Social media links (Discord, Twitter/X, Telegram)
+- ✅ Wallet address & private key (admin-only visibility)
+- ✅ Progress notes dengan inline editing
+- ✅ Project completion tracking (earnings + dates)
+
+### 2. **Daily Checklist**
+- ✅ Per-user per-airdrop daily task tracking
+- ✅ Auto-reset setelah 24 jam
+- ✅ Visual indicator pada card (green highlight saat completed)
+- ✅ Toggle button di card untuk mark as done
+
+### 3. **Role-Based Access Control**
+- **Admin:** Full access (create, edit, delete, view private keys)
+- **View:** Read-only + password change
+
+### 4. **Advanced Filtering & Search**
+- 8 status filters (Daily, Active, Eligible, Not Eligible, Hold, Waitlist, Completed, All)
+- Real-time search by project name atau task type
+- Default filter: Daily
+
+### 5. **Dark Mode**
+- Toggle button di navbar
+- Preference disimpan di localStorage
+- Responsive design untuk semua screen sizes
+
+### 6. **Dashboard**
+- Welcome section
+- 6 metric cards (Airdrop Overview, Active Projects, Completed Projects, Total Earnings, Quick Actions, Account Info)
+- Header stats (7 metrics dalam single row)
+
+## 📁 Project Structure
+
+```
+crypto-dashboard/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── DashboardController.php
+│   │   ├── AirdropController.php
+│   │   └── ...
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Airdrop.php
+│   │   └── DailyChecklist.php
+│   └── ...
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── database.sqlite
+├── resources/
+│   ├── views/
+│   │   ├── layouts/app.blade.php
+│   │   ├── dashboard.blade.php
+│   │   ├── airdrop/
+│   │   │   ├── index.blade.php
+│   │   │   ├── create.blade.php
+│   │   │   ├── edit.blade.php
+│   │   │   └── show.blade.php
+│   │   ├── profile/
+│   │   ├── settings/
+│   │   └── auth/
+│   ├── css/
+│   └── js/
+├── routes/
+│   ├── web.php
+│   └── auth.php
+├── public/
+│   ├── favicon.ico
+│   └── ...
+└── ...
+```
+
+## 🔧 Configuration
+
+### Environment Variables (.env)
+
+```env
+APP_NAME="Crypto Dashboard"
+APP_ENV=local
+APP_KEY=base64:...
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/path/to/database.sqlite
+
+MAIL_MAILER=log
+```
+
+### Database (SQLite)
+
+Database file tersimpan di `database/database.sqlite`. Untuk production, gunakan MySQL atau PostgreSQL:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crypto_dashboard
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## 📊 Database Schema
+
+### Airdrops Table
+```sql
+- id (primary key)
+- name (string)
+- link (string)
+- chain (string)
+- task_type (enum: testnet, retro, node, mining, social_task)
+- discord_link (nullable string)
+- twitter_link (nullable string)
+- telegram_link (nullable string)
+- wallet_address (string)
+- private_key (string, admin-only)
+- notes (text, nullable)
+- logo (string, nullable)
+- description (text, nullable)
+- status (enum: daily, active, eligible, not_eligible, hold, waitlist)
+- is_completed (boolean)
+- earnings (decimal, nullable)
+- start_date (timestamp)
+- end_date (timestamp, nullable)
+- created_by (foreign key to users)
+- created_at, updated_at
+```
+
+### Daily Checklists Table
+```sql
+- id (primary key)
+- user_id (foreign key to users)
+- airdrop_id (foreign key to airdrops)
+- is_completed (boolean)
+- completed_at (timestamp, nullable)
+- reset_at (timestamp, nullable)
+- created_at, updated_at
+```
+
+## 🛣️ API Routes
+
+### Authentication
+- `POST /login` - Login
+- `POST /logout` - Logout
+
+### Dashboard
+- `GET /dashboard` - Dashboard page
+
+### Airdrop Management
+- `GET /airdrop` - List airdrops (dengan filtering & search)
+- `GET /airdrop/create` - Create form
+- `POST /airdrop` - Store airdrop
+- `GET /airdrop/{id}` - Show detail
+- `GET /airdrop/{id}/edit` - Edit form
+- `PUT /airdrop/{id}` - Update airdrop
+- `DELETE /airdrop/{id}` - Delete airdrop
+- `PATCH /airdrop/{id}/status` - Update status
+- `PATCH /airdrop/{id}/notes` - Update notes
+- `POST /airdrop/{id}/mark-completed` - Mark as completed
+- `POST /airdrop/{id}/toggle-daily-checklist` - Toggle daily checklist
+
+### Profile & Settings
+- `GET /profile` - Profile page
+- `PUT /profile` - Update profile
+- `GET /settings` - Settings page
+- `PUT /settings` - Update settings
+
+## 🧪 Testing
+
+```bash
+# Run tests
+php artisan test
+
+# Run tests dengan coverage
+php artisan test --coverage
+```
+
+## 🚀 Deployment
+
+### Production Setup
+
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/winzzy12/crypto-dashboard.git
+   cd crypto-dashboard
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install --no-dev
+   npm install
+   npm run build
+   ```
+
+3. **Setup environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Configure database** (gunakan MySQL/PostgreSQL untuk production)
+   ```bash
+   php artisan migrate --force
+   ```
+
+5. **Setup web server** (Nginx/Apache)
+   - Point document root ke `public/` folder
+   - Setup SSL certificate
+   - Configure domain
+
+6. **Start application**
+   ```bash
+   php artisan serve --host=0.0.0.0 --port=8000
+   ```
+
+   Atau gunakan supervisor untuk long-running process:
+   ```bash
+   [program:crypto-dashboard]
+   process_name=%(program_name)s_%(process_num)02d
+   command=php /path/to/crypto-dashboard/artisan serve --host=0.0.0.0 --port=8000
+   autostart=true
+   autorestart=true
+   numprocs=1
+   redirect_stderr=true
+   stdout_logfile=/var/log/crypto-dashboard.log
+   ```
+
+## 🔐 Security
+
+- ✅ CSRF protection enabled
+- ✅ SQL injection prevention (Eloquent ORM)
+- ✅ XSS protection (Blade escaping)
+- ✅ Password hashing (bcrypt)
+- ✅ Private key visibility restricted to admin users
+- ✅ Role-based access control
+
+### Best Practices
+1. Jangan commit `.env` file ke repository
+2. Gunakan strong password untuk admin account
+3. Setup HTTPS untuk production
+4. Regular backup database
+5. Keep Laravel & dependencies updated
+
+## 📝 Common Tasks
+
+### Add New Airdrop
+1. Login sebagai admin
+2. Klik "Add Airdrop" button
+3. Fill form dengan details
+4. Upload logo (PNG/JPG)
+5. Submit
+
+### Update Airdrop Status
+1. Buka airdrop detail
+2. Pilih status dari dropdown
+3. Status akan auto-update
+
+### Mark Daily Checklist
+1. Di airdrop list, klik toggle button pada card
+2. Card akan highlight green saat completed
+3. Auto-reset setelah 24 jam
+
+### View Private Key (Admin Only)
+1. Buka airdrop detail
+2. Scroll ke wallet section
+3. Klik "Show" button untuk reveal private key
+4. Klik "Copy" untuk copy ke clipboard
+
+## 🐛 Troubleshooting
+
+### Database Error
+```bash
+# Reset database
+php artisan migrate:refresh --seed
+```
+
+### Asset not loading
+```bash
+# Rebuild assets
+npm run build
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+```
+
+### Permission denied
+```bash
+# Fix permissions
+chmod -R 775 storage bootstrap/cache
+```
+
+### Port already in use
+```bash
+# Use different port
+php artisan serve --port=8001
+```
+
+## 📚 Documentation
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Laravel Breeze](https://laravel.com/docs/breeze)
+- [Blade Templates](https://laravel.com/docs/blade)
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 👤 Author
+
+Wanz (Jawir)
+
+## 🤝 Contributing
+
+Contributions welcome! Please feel free to submit a Pull Request.
+
+---
+
+**Last Updated:** May 20, 2026
+**Version:** 1.0.0
